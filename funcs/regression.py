@@ -97,4 +97,3 @@ def compare_regs(X_train, y_train, X_test, y_test, regressors):
 
         except Exception as e:
             print(f"Error training/evaluating {name}: {e}")
-
