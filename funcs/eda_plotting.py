@@ -70,7 +70,7 @@ def plot_feature_target_correlations(df, target_col='Depression'):
         df (pd.DataFrame): DataFrame containing numerical features and the target.
         target_col (str): The name of the binary target column.
     """
-
+    import numpy as np
 
     #Calculate correlation of all features with the target column
     # .corr() automatically ignores non-numeric columns
