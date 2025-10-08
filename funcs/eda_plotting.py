@@ -70,8 +70,6 @@ def plot_feature_target_correlations(df, target_col='Depression'):
         df (pd.DataFrame): DataFrame containing numerical features and the target.
         target_col (str): The name of the binary target column.
     """
-    import numpy as np
-
     #Calculate correlation of all features with the target column
     # .corr() automatically ignores non-numeric columns
     correlation_series = df.corr()[target_col]
@@ -86,8 +84,8 @@ def plot_feature_target_correlations(df, target_col='Depression'):
     plt.figure(figsize=(30, 8))
     
     #Create the bar plot
-    bars = plt.bar(correlation_series.index, correlation_series.values, 
-                   color=plt.cm.viridis(np.linspace(0, 1, len(correlation_series))))   #to give it the gradient effect
+    bars = plt.bar(correlation_series.index, correlation_series.values, color=plt.cm.viridis(np.linspace(0, 1, len(correlation_series))))   
+    #to give it the gradient effect
     
     plt.title(f'Correlation of Features with "{target_col}"', fontsize=16)
     plt.ylabel('Correlation Coefficient', fontsize=12)
