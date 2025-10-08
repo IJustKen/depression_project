@@ -1,3 +1,13 @@
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    classification_report,
+    accuracy_score,
+    confusion_matrix,
+    ConfusionMatrixDisplay,
+)
+import matplotlib.pyplot as plt
 #function to compare multiple classifiers side-by-side
 #supply a dictionary of sklearn model instances (e.g., {"svc": SVC(), "rf": RandomForestClassifier()})
 #each classifier is fit, evaluated, and its confusion matrix is visualized.
