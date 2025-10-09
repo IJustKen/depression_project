@@ -106,5 +106,72 @@ def select_features_with_lasso(X_train, y_train):
 
 
 
+import numpy as np
+import pandas as pd
+from sklearn.decomposition import PCA
+
+def apply_pca(X_train_scaled, X_test_scaled, n_components=0.95):
+    """
+    Applies PCA to the scaled training and testing data.
+
+    Args:
+        X_train_scaled (np.array or pd.DataFrame): The scaled training data with selected features.
+        X_test_scaled (np.array or pd.DataFrame): The scaled testing data with selected features.
+        n_components (float or int): 
+            - If float (e.g., 0.95), it's the percentage of variance to retain.
+            - If int (e.g., 10), it's the exact number of components to keep.
+
+    Returns:
+        tuple: A tuple containing:
+            - X_train_pca (np.array): The transformed training data.
+            - X_test_pca (np.array): The transformed testing data.
+            - pca_model (PCA): The fitted PCA object.
+    """
+    # 1. Initialize PCA
+    # We will fit PCA only on the training data
+    pca_model = PCA(n_components=n_components, random_state=42)
+    
+    # 2. Fit on training data and transform it
+    X_train_pca = pca_model.fit_transform(X_train_scaled)
+    
+    # 3. Use the same fitted model to transform the test data
+    X_test_pca = pca_model.transform(X_test_scaled)
+    
+    # --- Reporting ---
+    print(f"Original number of features: {X_train_scaled.shape[1]}")
+    print(f"Number of components selected: {pca_model.n_components_}")
+    
+    explained_variance = np.sum(pca_model.explained_variance_ratio_)
+    print(f"Total variance explained by selected components: {explained_variance:.4f}")
+    
+    return X_train_pca, X_test_pca, pca_model
+
+# --- How to use the function ---
+
+# Assume you have already done the following:
+# 1. Created new features.
+# 2. Encoded categorical columns.
+# 3. Split into X_train, X_test, y_train, y_test.
+# 4. Used Random Forest to get a 'selected_features_list'.
+# 5. Created X_train_selected and X_test_selected dataframes.
+# 6. Scaled the data:
+#    from sklearn.preprocessing import StandardScaler
+#    scaler = StandardScaler()
+#    X_train_scaled = scaler.fit_transform(X_train_selected)
+#    X_test_scaled = scaler.transform(X_test_selected)
+
+
+# Now, apply PCA to retain 95% of the variance
+# X_train_pca, X_test_pca, pca = apply_pca(X_train_scaled, X_test_scaled, n_components=0.95)
+
+# Or, apply PCA to get exactly 10 components
+# X_train_pca_10, X_test_pca_10, pca_10 = apply_pca(X_train_scaled, X_test_scaled, n_components=10)
+
+
+# The output X_train_pca is a NumPy array. You can now use it to train your model.
+# For example:
+# from sklearn.linear_model import LogisticRegression
+# model = LogisticRegression()
+# model.fit(X_train_pca, y_train)
 
 
