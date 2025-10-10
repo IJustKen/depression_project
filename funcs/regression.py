@@ -1,5 +1,5 @@
 import numpy as np
-from src.plotting import plot_residual
+import seaborn as sns
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, Ridge, Lasso
@@ -8,45 +8,52 @@ from sklearn.svm import SVR
 from sklearn.ensemble import BaggingRegressor, RandomForestRegressor
 
 
-def get_training_scores(X, y):
+def plot_residual(y_true, y_pred, residuals, title="Residual Plot"):
+    plt.figure(figsize=(8, 6))
+    sns.scatterplot(x=y_pred, y=residuals, color='dodgerblue', edgecolor='k', s=60)
+
+    plt.axhline(y=0, color='red', linestyle='--', linewidth=1.5)
+
+    plt.title(title, fontsize=14)
+    plt.xlabel("Predicted Values", fontsize=12)
+    plt.ylabel("Residuals (y_true - y_pred)", fontsize=12)
+    plt.grid(True, linestyle='--', alpha=0.6)
+    plt.show()
+
+
+def get_training_scores(X_train, y_train, X_test, y_test):
     scoreList = []
 
     for i in range(1, 5):
         poly = PolynomialFeatures(i)
-        X_poly = poly.fit_transform(X)
-
-        X_train, X_test, y_train, y_test = train_test_split(
-            X_poly, np.array(y), test_size=0.2, random_state=42
-        )
+        X_train_poly = poly.fit_transform(X_train)
+        X_test_poly = poly.transform(X_test)
 
         model = LinearRegression()
-        model.fit(X_train, y_train)
-        pred = model.predict(X_test)
+        model.fit(X_train_poly, y_train)
+        pred = model.predict(X_test_poly)
 
         scoreList.append(r2_score(y_test, pred))
 
     return scoreList
 
 
-def regress_linear(X, y, degree=3):
+def regress_linear(X_train, y_train, X_test, y_test, degree=3):
     poly = PolynomialFeatures(degree)
-    X_poly = poly.fit_transform(X)
-
-    X_train, X_test, y_train, y_test = train_test_split(
-        X_poly, np.array(y), test_size=0.2, random_state=42
-    )
+    X_train_poly = poly.fit_transform(X_train)
+    X_test_poly = poly.transform(X_test)
 
     model = LinearRegression()
-    model.fit(X_train, y_train)
-    pred = model.predict(X_test)
+    model.fit(X_train_poly, y_train)
+    pred = model.predict(X_test_poly)
 
     r2 = r2_score(y_test, pred)
     mse = mean_squared_error(y_test, pred)
-    
-    print("\n--- Polynomial Linear Regression (Degree {}) ---".format(degree))
-    print("R2 Score:", r2)
-    print("Mean Squared Error:", mse)
-    
+
+    print(f"\\nPolynomial Linear Regression (Degree {degree})")
+    print(f"R2 Score: {r2}")
+    print(f"Mean Squared Error: {mse}")
+
     residuals = y_test - pred
     plot_residual(y_test, pred, residuals, f"Poly Linear Reg D={degree}")
 
@@ -89,7 +96,7 @@ def compare_regs(X_train, y_train, X_test, y_test, regressors):
 
             mse = mean_squared_error(y_test, y_pred_reg)
             r2 = r2_score(y_test, y_pred_reg)
-            
+
             print(f"{name} Regressor - MSE: {mse:.4f}, R2 Score: {r2:.4f}")
             residuals = y_test - y_pred_reg
 
