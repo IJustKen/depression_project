@@ -85,7 +85,7 @@ def rm_rows_with_rare_cats(df: pd.DataFrame, min_count: int = 10) -> pd.DataFram
     print("-" * 40)
 
     for column in df.columns:
-        is_numerical = pd.api.types.is_numeric_dtype(data[column])
+        is_numerical = pd.api.types.is_numeric_dtype(df[column])
         if is_numerical:
             continue
         else:
