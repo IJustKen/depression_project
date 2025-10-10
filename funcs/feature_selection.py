@@ -9,7 +9,7 @@ def feat_eng(df):
     df['Resilience'] = df['CGPA'] * (df['Academic Pressure'] + df['Work Pressure']) * df['Work/Study Hours']
   
   # this feature measures the balance between stress and satisfaction. A high value might indicate an unhealthy balance.
-    df['Pressure_Satisfaction_Ratio'] = df['Total_Pressure'] / (df['Average_Satisfaction'] + 0.01)
+    df['Pressure_Satisfaction_Ratio'] = (df['Academic Pressure'] + df['Work Pressure']) / (df['Average_Satisfaction'] + 0.01)
   # adding a small number to the denominator to avoid division by zero
 
     return df
