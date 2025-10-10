@@ -1,0 +1,4 @@
+1) Don't drop datapoints just cuz of invalid values in one of the columns.
+2) Remove columns like City which are not informative.
+3) Try other feture selection methods (recursive feature selection example).
+4) Do CV next and tune.
