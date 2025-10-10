@@ -1,7 +1,6 @@
 #input the df BEFORE scaling/normalizing
 def feat_eng(df):
   # combining satisfaction from studies and job both and getting average
-    df['Total_Pressure'] = df['Academic Pressure'] + df['Work Pressure']
     df['Average_Satisfaction'] = (df['Study Satisfaction'] + df['Job Satisfaction']) / 2
   
   # this measures how resilient one is to pressure, we are assuming the hypothesis that if your CGPA is high
