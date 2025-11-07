@@ -29,4 +29,19 @@ def best_svc_params_randomizedsearch(X_train, y_train, param_grid):
 
     return rand_search
 
+def best_rf_params_gridsearch(X_train, y_train, param_grid):
+    rf = RandomForestClassifier(random_state=42)
+
+    # Set up GridSearchCV with 5-fold cross-validation
+    grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, 
+                           cv=5, n_jobs=-1, verbose=2, scoring='accuracy')
+
+    # Fit GridSearchCV to your data
+    grid_search.fit(x_train, y_train)
+    print(f"Best parameters found: {grid_search.best_params_}")
+    print(f"Best CV score: {grid_search.best_score_:.4f}")
+
+    return grid_search
+
+
 
