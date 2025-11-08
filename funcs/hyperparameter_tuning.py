@@ -45,18 +45,18 @@ def best_rf_params_gridsearch(X_train, y_train, param_grid):
 
     return grid_search
 
-def best_rf_params_halvinggridsearch(X_train, y_train, param_grid):
-    halving_search = HalvingGridSearchCV(
-        estimator = RandomForestClassifier(random_state=42),
-        param_grid = param_grid,
-        factor = 2,
-        cv = 5,
-        n_jobs=-1)
-    halving_search.fit(X_train, y_train)
-    print(f"Best parameters found: {halving_search.best_params_}")
-    print(f"Best CV score: {halving_search.best_score_}")
+# def best_rf_params_halvinggridsearch(X_train, y_train, param_grid):
+#     halving_search = HalvingGridSearchCV(
+#         estimator = RandomForestClassifier(random_state=42),
+#         param_grid = param_grid,
+#         factor = 2,
+#         cv = 5,
+#         n_jobs=-1)
+#     halving_search.fit(X_train, y_train)
+#     print(f"Best parameters found: {halving_search.best_params_}")
+#     print(f"Best CV score: {halving_search.best_score_}")
     
-    return halving_search
+#     return halving_search
 
 def best_rf_params_randomizedsearch(X_train, y_train, param_grid):
     rand_search = RandomizedSearchCV(
