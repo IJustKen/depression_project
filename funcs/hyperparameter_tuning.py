@@ -44,7 +44,7 @@ def best_rf_params_gridsearch(X_train, y_train, param_grid):
 
     return grid_search
 
-def best_rf_params_halvinggridsearch(X_train, y_train. param_grid):
+def best_rf_params_halvinggridsearch(X_train, y_train, param_grid):
     halving_search = HalvingGridSearchCV(
         estimator = RandomForestClassifier(random_state=42),
         param_grid = param_grid,
