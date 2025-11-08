@@ -38,7 +38,7 @@ def best_rf_params_gridsearch(X_train, y_train, param_grid):
                            cv=5, n_jobs=-1, verbose=2, scoring='accuracy')
 
     # Fit GridSearchCV to your data
-    grid_search.fit(x_train, y_train)
+    grid_search.fit(X_train, y_train)
     print(f"Best parameters found: {grid_search.best_params_}")
     print(f"Best CV score: {grid_search.best_score_:.4f}")
 
