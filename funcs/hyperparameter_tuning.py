@@ -1,5 +1,5 @@
 from sklearn.svm import SVC
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV. HalvingGridSearchCV
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV, HalvingGridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 
 def best_svc_params_gridsearch(X_train, y_train, param_grid):
