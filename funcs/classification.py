@@ -38,6 +38,7 @@ def classify_svc(x_train, y_train, x_test, y_test, **kwargs):
 #use for multi-feature and multi-class problems. randomforestclassifier is robust to feature scaling.
 def classify_rf(x_train, y_train, x_test, y_test, **kwargs):
     #initialize random forest model; reproducible results with random_state
+    print(f"Hyperparameters passed: {kwargs}")
     rf_classifier = RandomForestClassifier(**kwargs, random_state=42)
     rf_classifier.fit(x_train, y_train)
 
