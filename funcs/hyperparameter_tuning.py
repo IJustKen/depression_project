@@ -1,5 +1,5 @@
 from sklearn.svm import SVC
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV, HalvingGridSearchCV
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV#,HalvingGridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.experimental import enable_halving_search_cv
 
