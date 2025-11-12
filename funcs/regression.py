@@ -9,15 +9,16 @@ from sklearn.ensemble import BaggingRegressor, RandomForestRegressor
 from matplotlib import pyplot as plt
 
 
-def plot_residual(y_true, y_pred, residuals, title="Residual Plot"):
-    plt.figure(figsize=(8, 6))
-    sns.scatterplot(x=y_pred, y=residuals, color='dodgerblue', edgecolor='k', s=60)
+def plot_result(y_true, y_pred, residuals, title="Comparison with true values"):
+    plt.figure(figsize=(10, 8))
+    # sns.scatterplot(x=y_pred, y=residuals, color='dodgerblue', edgecolor='k', s=60)
 
-    plt.axhline(y=0, color='red', linestyle='--', linewidth=1.5)
-
+    # plt.axhline(y=0, color='red', linestyle='--', linewidth=1.5)
     plt.title(title, fontsize=14)
-    plt.xlabel("Predicted Values", fontsize=12)
-    plt.ylabel("Residuals (y_true - y_pred)", fontsize=12)
+    plt.plot(np.arange(len(y_true)), y_true, color='blue', linewidth = 0.3)
+    plt.plot(np.arange(len(y_pred)), y_pred, color='green', linewidth = 0.3)
+    plt.xlabel("Data point", fontsize=12)
+    plt.ylabel("CGPA", fontsize=12)
     plt.grid(True, linestyle='--', alpha=0.6)
     plt.show()
 
