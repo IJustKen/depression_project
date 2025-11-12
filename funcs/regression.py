@@ -6,6 +6,7 @@ from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.metrics import r2_score, mean_squared_error
 from sklearn.svm import SVR
 from sklearn.ensemble import BaggingRegressor, RandomForestRegressor
+from matplotlib import pyplot as plt
 
 
 def plot_residual(y_true, y_pred, residuals, title="Residual Plot"):
