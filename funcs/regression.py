@@ -57,7 +57,7 @@ def regress_linear(X_train, y_train, X_test, y_test, degree=3):
     print(f"Mean Squared Error: {mse}")
 
     residuals = y_test - pred
-    plot_residual(y_test, pred, residuals, f"Poly Linear Reg D={degree}")
+    plot_result(y_test, pred, residuals, f"Poly Linear Reg D={degree}")
 
 
 def regress_bagging(X_train, y_train, X_test, y_test):
