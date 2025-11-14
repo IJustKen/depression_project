@@ -2,6 +2,9 @@ from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV#,HalvingGridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.experimental import enable_halving_search_cv
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.naive_bayes import GaussianNB
 
 def best_svc_params_gridsearch(X_train, y_train, param_grid):
     """
@@ -72,4 +75,49 @@ def best_rf_params_randomizedsearch(X_train, y_train, param_grid):
 
     return rand_search
 
+def best_knn_params_gridsearch(X_train, y_train, param_grid):
+    knn = KNeighborsClassifier()
+    grid_search = GridSearchCV(estimator=knn, param_grid=param_grid, 
+                           cv=5, n_jobs=-1, verbose=2, scoring='accuracy')
+    grid_search.fit(X_train, y_train)
+    print(f"Best parameters found: {grid_search.best_params_}")
+    print(f"Best CV score: {grid_search.best_score_:.4f}")
+    return grid_search
 
+def best_knn_params_randomizedsearch(X_train, y_train, param_grid):
+    knn = KNeighborsClassifier()
+    rand_search = RandomizedSearchCV(estimator=knn, param_distributions=param_grid, 
+                                     n_iter=100, cv=5, n_jobs=-1, verbose=2, 
+                                     scoring='accuracy', random_state=42)
+    rand_search.fit(X_train, y_train)
+    print(f"Best parameters found: {rand_search.best_params_}")
+    print(f"Best CV score: {rand_search.best_score_:.4f}")
+    return rand_search
+
+def best_dt_params_gridsearch(X_train, y_train, param_grid):
+    dt = DecisionTreeClassifier(random_state=42)
+    grid_search = GridSearchCV(estimator=dt, param_grid=param_grid, 
+                           cv=5, n_jobs=-1, verbose=2, scoring='accuracy')
+    grid_search.fit(X_train, y_train)
+    print(f"Best parameters found: {grid_search.best_params_}")
+    print(f"Best CV score: {grid_search.best_score_:.4f}")
+    return grid_search
+
+def best_dt_params_randomizedsearch(X_train, y_train, param_grid):
+    dt = DecisionTreeClassifier(random_state=42)
+    rand_search = RandomizedSearchCV(estimator=dt, param_distributions=param_grid, 
+                                     n_iter=100, cv=5, n_jobs=-1, verbose=2, 
+                                     scoring='accuracy', random_state=42)
+    rand_search.fit(X_train, y_train)
+    print(f"Best parameters found: {rand_search.best_params_}")
+    print(f"Best CV score: {rand_search.best_score_:.4f}")
+    return rand_search
+
+def best_gnb_params_gridsearch(X_train, y_train, param_grid):
+    gnb = GaussianNB()
+    grid_search = GridSearchCV(estimator=gnb, param_grid=param_grid, 
+                           cv=5, n_jobs=-1, verbose=2, scoring='accuracy')
+    grid_search.fit(X_train, y_train)
+    print(f"Best parameters found: {grid_search.best_params_}")
+    print(f"Best CV score: {grid_search.best_score_:.4f}")
+    return grid_search
