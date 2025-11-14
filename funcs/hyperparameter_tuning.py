@@ -86,7 +86,7 @@ def best_knn_params_gridsearch(X_train, y_train, param_grid):
 def best_knn_params_randomizedsearch(X_train, y_train, param_grid):
     knn = KNeighborsClassifier()
     rand_search = RandomizedSearchCV(estimator=knn, param_distributions=param_grid, 
-                                     n_iter=100, cv=5, n_jobs=-1, verbose=2, 
+                                     n_iter=10, cv=5, n_jobs=-1, verbose=2, 
                                      scoring='accuracy', random_state=42)
     rand_search.fit(X_train, y_train)
     print(f"Best parameters found: {rand_search.best_params_}")
@@ -105,7 +105,7 @@ def best_dt_params_gridsearch(X_train, y_train, param_grid):
 def best_dt_params_randomizedsearch(X_train, y_train, param_grid):
     dt = DecisionTreeClassifier(random_state=42)
     rand_search = RandomizedSearchCV(estimator=dt, param_distributions=param_grid, 
-                                     n_iter=100, cv=5, n_jobs=-1, verbose=2, 
+                                     n_iter=10, cv=5, n_jobs=-1, verbose=2, 
                                      scoring='accuracy', random_state=42)
     rand_search.fit(X_train, y_train)
     print(f"Best parameters found: {rand_search.best_params_}")
