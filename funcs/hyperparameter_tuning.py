@@ -65,7 +65,6 @@ def best_rf_params_randomizedsearch(X_train, y_train, param_grid):
     rand_search = RandomizedSearchCV(
         estimator= RandomForestClassifier(),
         param_distributions = param_grid,
-        n_iter = 300,
         cv = 5,
         n_jobs = -1,
         random_state = 42)
