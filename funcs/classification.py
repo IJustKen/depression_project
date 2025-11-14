@@ -1,4 +1,6 @@
-
+from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
@@ -78,3 +80,69 @@ def classify_logistic(x_train, y_train, x_test, y_test, **kwargs):
     conf_matrix = confusion_matrix(y_test, y_pred)
     cmd = ConfusionMatrixDisplay(conf_matrix)
     cmd.plot(cmap=plt.cm.Blues)
+
+def classify_gnb(x_train, y_train, x_test, y_test, **kwargs):
+    # Initialize the GNB model
+    clf = GaussianNB(**kwargs)
+  
+    # Fit the model
+    clf.fit(x_train, y_train)
+
+    # Predict class labels
+    y_pred = clf.predict(x_test)
+
+    # Compute and print accuracy
+    accuracy_clf = accuracy_score(y_test, y_pred)
+    print(f"GNB classification accuracy: {accuracy_clf}")
+
+    # Print detailed report
+    print("GNB classification report", classification_report(y_test, y_pred))
+
+    # Visualize the confusion matrix
+    cmd = ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred))
+    cmd.plot(cmap=plt.cm.Blues)
+    plt.title("GNB Confusion Matrix")
+
+def classify_dt(x_train, y_train, x_test, y_test, **kwargs):
+    # Initialize Decision Tree model
+    clf = DecisionTreeClassifier(**kwargs)
+  
+    # Fit the model
+    clf.fit(x_train, y_train)
+
+    # Predict class labels
+    y_pred = clf.predict(x_test)
+
+    # Compute and print accuracy
+    accuracy_clf = accuracy_score(y_test, y_pred)
+    print(f"Decision Tree classification accuracy: {accuracy_clf}")
+
+    # Print detailed report
+    print("Decision Tree classification report", classification_report(y_test, y_pred))
+
+    # Visualize the confusion matrix
+    cmd = ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred))
+    cmd.plot(cmap=plt.cm.Blues)
+    plt.title("Decision Tree Confusion Matrix")
+
+def classify_knn(x_train, y_train, x_test, y_test, **kwargs):
+    # Initialize KNN model
+    clf = KNeighborsClassifier(**kwargs)
+  
+    # Fit the model
+    clf.fit(x_train, y_train)
+
+    # Predict class labels
+    y_pred = clf.predict(x_test)
+
+    # Compute and print accuracy
+    accuracy_clf = accuracy_score(y_test, y_pred)
+    print(f"KNN classification accuracy: {accuracy_clf}")
+
+    # Print detailed report
+    print("KNN classification report", classification_report(y_test, y_pred))
+
+    # Visualize the confusion matrix
+    cmd = ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred))
+    cmd.plot(cmap=plt.cm.Blues)
+    plt.title("KNN Confusion Matrix")
