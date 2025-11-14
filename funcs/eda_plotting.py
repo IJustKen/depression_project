@@ -134,4 +134,51 @@ def plot_grouped_boxplots(df, target_col='Depression'):
 
 # plot_grouped_boxplots(df, target_col='Depression')
 
+#For clustering
+def plot_correlation_heatmap(df, figsize=(14, 10)):
+    """
+    Plots a correlation heatmap for all numerical features.
+    """
+    import seaborn as sns
+    import matplotlib.pyplot as plt
 
+    # Select only numerical columns
+    numeric_df = df.select_dtypes(include=['number'])
+
+    plt.figure(figsize=figsize)
+    corr = numeric_df.corr()
+
+    sns.heatmap(corr, annot=False, cmap='viridis', center=0)
+    
+    plt.title("Correlation Heatmap (Numerical Features)", fontsize=16)
+    plt.tight_layout()
+    plt.show()
+
+from sklearn.decomposition import PCA
+
+def plot_pca_2d(df, labels=None, figsize=(8, 6)):
+    """
+    Reduces features to 2D using PCA and plots the projection.
+    If labels are passed (e.g., cluster labels), points are colored accordingly.
+    """
+    import matplotlib.pyplot as plt
+
+    # PCA only works on numeric features
+    numeric_df = df.select_dtypes(include=['number'])
+
+    pca = PCA(n_components=2)
+    reduced = pca.fit_transform(numeric_df)
+
+    plt.figure(figsize=figsize)
+    if labels is None:
+        plt.scatter(reduced[:, 0], reduced[:, 1], alpha=0.7)
+    else:
+        plt.scatter(reduced[:, 0], reduced[:, 1], c=labels, cmap='viridis', alpha=0.7)
+
+    plt.xlabel("PCA Component 1")
+    plt.ylabel("PCA Component 2")
+    plt.title("PCA 2D Projection")
+    plt.tight_layout()
+    plt.show()
+
+    return reduced
