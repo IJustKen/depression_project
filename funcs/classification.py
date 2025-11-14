@@ -80,6 +80,7 @@ def classify_logistic(x_train, y_train, x_test, y_test, **kwargs):
     conf_matrix = confusion_matrix(y_test, y_pred)
     cmd = ConfusionMatrixDisplay(conf_matrix)
     cmd.plot(cmap=plt.cm.Blues)
+    return clf
 
 def classify_gnb(x_train, y_train, x_test, y_test, **kwargs):
     # Initialize the GNB model
