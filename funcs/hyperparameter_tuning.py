@@ -26,7 +26,7 @@ def best_svc_params_randomizedsearch(X_train, y_train, param_grid):
     Performs randomized search to find the best hyperparameters for an SVC.
     """
     base_clf = SVC()
-    rand_search = RandomizedSearchCV(base_clf,param_distributions=param_grid, verbose=3, scoring='accuracy')
+    rand_search = RandomizedSearchCV(base_clf,param_distributions=param_grid, verbose=3, scoring='accuracy', n_iter=10)
     rand_search.fit(X_train, y_train)
 
     print(f"Best parameters found: {rand_search.best_params_}")
@@ -65,7 +65,7 @@ def best_rf_params_randomizedsearch(X_train, y_train, param_grid):
     rand_search = RandomizedSearchCV(
         estimator= RandomForestClassifier(),
         param_distributions = param_grid,
-        cv = 3,
+        cv = 3, n_iter=10,
         verbose = 3,
         random_state = 42, scoring = 'accuracy')
     rand_search.fit(X_train, y_train)
