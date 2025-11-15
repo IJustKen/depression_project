@@ -11,7 +11,7 @@ def best_svc_params_gridsearch(X_train, y_train, param_grid):
     Performs a grid search to find the best hyperparameters for an SVC.
     """
     base_clf = SVC()
-    grid_search = GridSearchCV(base_clf, param_grid=param_grid, cv=5, scoring='accuracy',verbose=3)
+    grid_search = GridSearchCV(base_clf, param_grid=param_grid, cv=3, scoring='accuracy',verbose=3)
     grid_search.fit(X_train, y_train)
     
     print(f"Best parameters found: {grid_search.best_params_}")
@@ -39,7 +39,7 @@ def best_rf_params_gridsearch(X_train, y_train, param_grid):
 
     # Set up GridSearchCV with 5-fold cross-validation
     grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, 
-                           cv=5, verbose=3, scoring='accuracy')
+                           cv=3, verbose=3, scoring='accuracy')
 
     # Fit GridSearchCV to your data
     grid_search.fit(X_train, y_train)
@@ -65,7 +65,7 @@ def best_rf_params_randomizedsearch(X_train, y_train, param_grid):
     rand_search = RandomizedSearchCV(
         estimator= RandomForestClassifier(),
         param_distributions = param_grid,
-        cv = 5,
+        cv = 3,
         verbose = 3,
         random_state = 42, scoring = 'accuracy')
     rand_search.fit(X_train, y_train)
@@ -77,7 +77,7 @@ def best_rf_params_randomizedsearch(X_train, y_train, param_grid):
 def best_knn_params_gridsearch(X_train, y_train, param_grid):
     knn = KNeighborsClassifier()
     grid_search = GridSearchCV(estimator=knn, param_grid=param_grid, 
-                           cv=5, verbose=3, scoring='accuracy')
+                           cv=3, verbose=3, scoring='accuracy')
     grid_search.fit(X_train, y_train)
     print(f"Best parameters found: {grid_search.best_params_}")
     print(f"Best CV score: {grid_search.best_score_:.4f}")
@@ -86,7 +86,7 @@ def best_knn_params_gridsearch(X_train, y_train, param_grid):
 def best_knn_params_randomizedsearch(X_train, y_train, param_grid):
     knn = KNeighborsClassifier()
     rand_search = RandomizedSearchCV(estimator=knn, param_distributions=param_grid, 
-                                     n_iter=10, cv=5, verbose=3, 
+                                     n_iter=10, cv=3, verbose=3, 
                                      scoring='accuracy', random_state=42)
     rand_search.fit(X_train, y_train)
     print(f"Best parameters found: {rand_search.best_params_}")
@@ -96,7 +96,7 @@ def best_knn_params_randomizedsearch(X_train, y_train, param_grid):
 def best_dt_params_gridsearch(X_train, y_train, param_grid):
     dt = DecisionTreeClassifier(random_state=42)
     grid_search = GridSearchCV(estimator=dt, param_grid=param_grid, 
-                           cv=5, verbose=3, scoring='accuracy')
+                           cv=3, verbose=3, scoring='accuracy')
     grid_search.fit(X_train, y_train)
     print(f"Best parameters found: {grid_search.best_params_}")
     print(f"Best CV score: {grid_search.best_score_:.4f}")
@@ -105,7 +105,7 @@ def best_dt_params_gridsearch(X_train, y_train, param_grid):
 def best_dt_params_randomizedsearch(X_train, y_train, param_grid):
     dt = DecisionTreeClassifier(random_state=42)
     rand_search = RandomizedSearchCV(estimator=dt, param_distributions=param_grid, 
-                                     n_iter=10, cv=5, verbose=3, 
+                                     n_iter=10, cv=3, verbose=3, 
                                      scoring='accuracy', random_state=42)
     rand_search.fit(X_train, y_train)
     print(f"Best parameters found: {rand_search.best_params_}")
@@ -115,7 +115,7 @@ def best_dt_params_randomizedsearch(X_train, y_train, param_grid):
 def best_gnb_params_gridsearch(X_train, y_train, param_grid):
     gnb = GaussianNB()
     grid_search = GridSearchCV(estimator=gnb, param_grid=param_grid, 
-                           cv=5, verbose=3, scoring='accuracy')
+                           cv=3, verbose=3, scoring='accuracy')
     grid_search.fit(X_train, y_train)
     print(f"Best parameters found: {grid_search.best_params_}")
     print(f"Best CV score: {grid_search.best_score_:.4f}")
